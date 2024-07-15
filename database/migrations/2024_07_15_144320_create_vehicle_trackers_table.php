@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('manufacturer');
             $table->string('model');
             $table->string('year');
+            $table->string('tracking_status');
             $table->timestamps();
         });
     }

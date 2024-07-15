@@ -25,6 +25,7 @@ class VehicleTrackerFactory extends Factory
             'manufacturer' => $manufacturer,
             'model' => $model,
             'year' => $year,
+            'tracking_status' => false
         ];
     }
 }
