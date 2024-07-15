@@ -18,4 +18,6 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
 Route::group(['prefix' => 'v1'], function($router) {
     Route::get('vehicles', [VehicleTrackerController::class, 'getVehicles']);
     Route::post('vehicle/{id}/update_status', [VehicleTrackerController::class, 'updateVehicleStatus']);
+    Route::post('vehicle/{id}/start_tracking', [VehicleTrackerController::class, 'startTracking']);
+    Route::post('vehicle/{id}/stop_tracking', [VehicleTrackerController::class, 'stopTracking']);
 });

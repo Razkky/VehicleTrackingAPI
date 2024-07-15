@@ -28,6 +28,26 @@ class VehicleTrackerController extends Controller
         return new VehicleTrackerResource($vehicle);
     }
 
+    public function startTracking($id) {
+        $vehicle = VehicleTracker::find($id);
+        if (!isset($vehicle)) {
+            return response()->json(['error' => 'No Vehicle with such id found'], 200);
+        }
+        $vehicle->tracking_status = true;
+        $vehicle->save();
+        return response()->json(['message' => 'Tracking Started Successfully'], 200);
+    }
+       
+    public function stopTracking($id) {
+        $vehicle = VehicleTracker::find($id);
+        if (!isset($vehicle)) {
+            return response()->json(['error' => 'No Vehicle with such id found'], 200);
+        }
+        $vehicle->tracking_status = false;
+        $vehicle->save();
+        return response()->json(['message' => 'Tracking Stopped Successfully'], 200);
+    }
+
     /**
      * Update the specified resource in storage.
      */
