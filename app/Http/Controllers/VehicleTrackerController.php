@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateVehicleTrackerRequest;
+use App\Http\Resources\LocationCollection;
 use App\Http\Resources\VehicleTrackerCollection;
 use App\Http\Resources\VehicleTrackerResource;
 use App\Models\VehicleTracker;
@@ -27,11 +28,11 @@ class VehicleTrackerController extends Controller
         $vehicle = VehicleTracker::find($id);
         info($vehicle);
         if (!isset($vehicle)) {
-            $message = 'No Vehicle with such id found';
+            $error = 'No Vehicle with such id found';
             return ApiResponse::json(
                 status: 'success',
-                code: 400,
-                message: $message,
+                code: 404,
+                error: $error,
             );
         }
         $vehicle->tracking_status = $request->trackingStatus;
@@ -47,11 +48,11 @@ class VehicleTrackerController extends Controller
     public function startTracking($id) {
         $vehicle = VehicleTracker::find($id);
         if (!isset($vehicle)) {
-            $message = 'No Vehicle with such id found';
+            $error = 'No Vehicle with such id found';
             return ApiResponse::json(
                 status: 'success',
-                code: 400,
-                message: $message,
+                code: 404,
+                error: $error,
             );
         }
         $vehicle->tracking_status = true;
@@ -67,11 +68,11 @@ class VehicleTrackerController extends Controller
     public function stopTracking($id) {
         $vehicle = VehicleTracker::find($id);
         if (!isset($vehicle)) {
-            $message = 'No Vehicle with such id found';
+            $error = 'No Vehicle with such id found';
             return ApiResponse::json(
                 status: 'success',
                 code: 400,
-                message: $message,
+                error: $error,
             );
         }
         $vehicle->tracking_status = false;
@@ -87,14 +88,14 @@ class VehicleTrackerController extends Controller
     public function getVehicleLocations($id) {
         $vehicle = VehicleTracker::find($id);
         if (!isset($vehicle)) {
-            $message = 'No Vehicle with such id found';
+            $error = 'No Vehicle with such id found';
             return ApiResponse::json(
                 status: 'success',
                 code: 400,
-                message: $message,
+                error: $error,
             );
         }
-        $locations = $vehicle->locations()->get();
+        $locations = new LocationCollection($vehicle->locations()->get());
         return ApiResponse::json(
             status: 'success',
             code: 200,
