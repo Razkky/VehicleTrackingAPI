@@ -9,6 +9,10 @@ class Location extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'longitude',
+        'latitude',
+    ];
     public function vehicle() {
         return $this->belongsTo(VehicleTracker::class);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\VehicleTracker;
 use Illuminate\Console\Command;
 
 class UpdateVehicleLocation extends Command
@@ -18,7 +19,7 @@ class UpdateVehicleLocation extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'update vehicle locations';
 
     /**
      * Execute the console command.
@@ -26,7 +27,7 @@ class UpdateVehicleLocation extends Command
     public function handle()
     {
         info("Cron Job running at ". now());
-        $vehicles = Vehicle::where('tracking_status', true)->get();
+        $vehicles = VehicleTracker::where('tracking_status', true)->get();
         foreach ($vehicles as $vehicle) {
             $vehicle->locations()->create([
                 'latitude' => $this->generateRandomLatitude(),
@@ -36,6 +37,10 @@ class UpdateVehicleLocation extends Command
     }
 
     private function generateRandomLongitude() {
+        return mt_rand(-90000000, 90000000) / 10000;
+    }
+
+    private function generateRandomLatitude() {
         return mt_rand(-90000000, 90000000) / 10000;
     }
 }

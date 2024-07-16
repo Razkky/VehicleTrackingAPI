@@ -48,12 +48,13 @@ class VehicleTrackerController extends Controller
         return response()->json(['message' => 'Tracking Stopped Successfully'], 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateVehicleTrackerRequest $request, VehicleTracker $vehicleTracker)
-    {
-        //
+    public function getVehicleLocations($id) {
+        $vehicle = VehicleTracker::find($id);
+        if (!isset($vehicle)) {
+            return response()->json(['error' => 'No Vehicle with such id found'], 200);
+        }
+        $locations = $vehicle->locations()->get();
+        return $locations;
     }
 
 }
