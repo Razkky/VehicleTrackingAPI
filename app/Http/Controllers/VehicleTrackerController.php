@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateVehicleStatusRequest;
 use App\Http\Requests\UpdateVehicleTrackerRequest;
 use App\Http\Resources\LocationCollection;
 use App\Http\Resources\VehicleTrackerCollection;
@@ -24,7 +25,8 @@ class VehicleTrackerController extends Controller
         );
     }
 
-    public function updateVehicleStatus(UpdateVehicleTrackerRequest $request, $id) {
+    public function updateVehicleStatus(UpdateVehicleStatusRequest $request, $id) {
+        $validatedData = $request->validated();
         $vehicle = VehicleTracker::find($id);
         info($vehicle);
         if (!isset($vehicle)) {
@@ -35,7 +37,7 @@ class VehicleTrackerController extends Controller
                 error: $error,
             );
         }
-        $vehicle->tracking_status = $request->trackingStatus;
+        $vehicle->tracking_status = $validatedData->trackingStatus;
         $vehicle->save();
         $data = new VehicleTrackerResource($vehicle);
         return ApiResponse::json(
