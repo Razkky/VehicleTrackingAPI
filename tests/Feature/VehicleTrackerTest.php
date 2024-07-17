@@ -1,6 +1,7 @@
 <?php
 namespace Tests\Feature;
 
+use App\Models\Location;
 use App\Models\User;
 use App\Models\VehicleTracker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -62,7 +63,7 @@ class VehicleTrackerTest extends TestCase
     }
 
     public function test_update_vehicle_status_fails_if_vehicle_not_found() {
-        $response = $this->json('POST', '/api/v1/vehicle/999/update_status', [
+        $response = $this->json('PUT', '/api/v1/vehicle/999/update_status', [
             'trackingStatus' => true
         ]);
 
@@ -83,7 +84,7 @@ class VehicleTrackerTest extends TestCase
             'tracking_status' => false
         ]);
 
-        $response = $this->json('POST', "/api/v1/vehicle/{$vehicle->id}/update_status", [
+        $response = $this->json('PUT', "/api/v1/vehicle/{$vehicle->id}/update_status", [
             'trackingStatus' => true
         ]);
 
@@ -161,5 +162,39 @@ class VehicleTrackerTest extends TestCase
 
         $vehicle = $vehicle->fresh();
         $this->assertFalse($vehicle->tracking_status == 1 ? true : false);
+        }
+
+    public function test_get_vehicle_locations_fails_if_vehicle_not_found() {
+            $response = $this->json('GET', '/api/v1/vehicle/999/locations');
+
+            $response->assertStatus(404)
+                    ->assertJson([
+                        'status' => 'error',
+                        'code' => 404,
+                        'error' => 'No Vehicle with such id found'
+                    ]);
+    }
+
+    public function test_get_vehicle_locations_returns_locations_successfully() {
+        $vehicle = VehicleTracker::factory()->create();
+
+        $locations = Location::factory()->count(3)->create([
+            'vehicle_tracker_id' => $vehicle->id
+        ]);
+
+        $response = $this->json('GET', "/api/v1/vehicle/{$vehicle->id}/locations");
+
+        $response->assertStatus(200)
+                ->assertJson([
+                    'status' => 'success',
+                    'code' => 200
+                ])
+                ->assertJsonCount(3, 'data');
+
+        foreach ($locations as $location) {
+            $response->assertJsonFragment([
+                'id' => $location->id,
+            ]);
+        }
     }
 }

@@ -22,7 +22,6 @@ class VehicleTrackerResource extends JsonResource
             'model' => $this->model,
             'year' => $this->year,
             'trackingStatus' => $this->tracking_status == 1 ? true : false,
-            // 'user' =>$this->user()->get()
         ];
     }
 }
