@@ -32,12 +32,12 @@ class VehicleTrackerController extends Controller
         if (!isset($vehicle)) {
             $error = 'No Vehicle with such id found';
             return ApiResponse::json(
-                status: 'success',
+                status: 'error',
                 code: 404,
                 error: $error,
             );
         }
-        $vehicle->tracking_status = $validatedData->trackingStatus;
+        $vehicle->tracking_status = $validatedData['trackingStatus'];
         $vehicle->save();
         $data = new VehicleTrackerResource($vehicle);
         return ApiResponse::json(
@@ -52,7 +52,7 @@ class VehicleTrackerController extends Controller
         if (!isset($vehicle)) {
             $error = 'No Vehicle with such id found';
             return ApiResponse::json(
-                status: 'success',
+                status: 'error',
                 code: 404,
                 error: $error,
             );
@@ -72,8 +72,8 @@ class VehicleTrackerController extends Controller
         if (!isset($vehicle)) {
             $error = 'No Vehicle with such id found';
             return ApiResponse::json(
-                status: 'success',
-                code: 400,
+                status: 'error',
+                code: 404,
                 error: $error,
             );
         }
@@ -92,8 +92,8 @@ class VehicleTrackerController extends Controller
         if (!isset($vehicle)) {
             $error = 'No Vehicle with such id found';
             return ApiResponse::json(
-                status: 'success',
-                code: 400,
+                status: 'error',
+                code: 404,
                 error: $error,
             );
         }

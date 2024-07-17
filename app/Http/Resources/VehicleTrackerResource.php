@@ -17,10 +17,11 @@ class VehicleTrackerResource extends JsonResource
         // return parent::toArray($request);
 
         return [
+            'id' => $this->id,
             'manufacturer' => $this->manufacturer,
             'model' => $this->model,
             'year' => $this->year,
-            'trackingStatus' => $this->tracking_status,
+            'trackingStatus' => $this->tracking_status == 1 ? true : false,
             // 'user' =>$this->user()->get()
         ];
     }
