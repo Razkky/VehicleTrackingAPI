@@ -1,0 +1,16 @@
+
+  [44;1m INFO [49;22m //.
+
+
+   PASS  Tests\Feature\VehicleTrackerTest
+  ✓ get vehicles returns all vehicles                                    0.36s  
+  ✓ update vehicle status fails if vehicle not found                     0.03s  
+  ✓ update vehicle status successfully updates vehicle                   0.01s  
+  ✓ start tracking fails if vehicle not found                            0.01s  
+  ✓ start tracking successfully starts tracking                          0.01s  
+  ✓ stop tracking fails if vehicle not found                             0.01s  
+  ✓ stop tracking successfully stop tracking                             0.01s  
+
+  Tests:    7 passed (17 assertions)
+  Duration: 0.54s
+
