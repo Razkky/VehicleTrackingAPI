@@ -17,6 +17,7 @@ What things you need to install the software and how to install them:
 
 - PHP >= 7.3
 - Composer
+- cron
 - MySQL or any other compatible database system
 - Laravel >= 8.x
 
@@ -28,6 +29,25 @@ A step-by-step series of examples that tell you how to get a development environ
 git clone https://github.com/Razkky/vehicle-tracking-api.git
 cd vehicle-tracking-api
 ./install.sh
+```
+
+### Setting up Task Scheduling with Cron
+To utilize Laravel's task scheduling capabilities, you must add a cron job that executes Laravel's scheduler every minute. This ensures your scheduled tasks are run at their specified intervals.
+
+Download Crontab on your machine
+Run crontab -e to edit the crontab for your user.
+
+``` bash
+crontab -e
+```
+Add the following line to file 
+* * * * * cd /path/to/your/project && php artisan schedule:run >> /path/to/your/project/storage/logs/cron.log 2>&1
+
+
+### Running application
+
+``` bash
+php artisan serve
 ```
 
 
