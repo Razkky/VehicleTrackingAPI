@@ -32,4 +32,7 @@ cp .env.example .env
 php artisan migrate:fresh --seed
 php artisan serve
 
+```
+
+
 For detailed information about API endpoints and usage, please refer to our [API Documentation](https://documenter.getpostman.com/view/34067711/2sA3kRJPK2#42f5d5e5-807c-4bfc-9315-2b54dc825cc4).
