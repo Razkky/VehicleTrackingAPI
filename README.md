@@ -4,7 +4,7 @@ This project is a Vehicle Tracking API developed using Laravel. It provides capa
 
 ## Features
 
-- User registration and authentication using JWT (JSON Web Tokens).
+- User authentication using API-based tokens.
 - API endpoints to handle vehicle tracking and status updates.
 
 ## Getting Started
@@ -22,14 +22,12 @@ What things you need to install the software and how to install them:
 
 ### Installing
 
-A step-by-step series of examples that tell you how to get a development env running:
+A step-by-step series of examples that tell you how to get a development environment running:
 
-1. Clone the repository:
-   ```bash
-2. git clone https://github.com/Razkky/vehicle-tracking-api.git
-3. cd vehicle-tracking-api
-4. composer install
-5. cp .env.example .env 
-6. php artisan migrate:fresh --seed
-7. php artisan serve
-   
+```bash
+git clone https://github.com/Razkky/vehicle-tracking-api.git
+cd vehicle-tracking-api
+composer install
+cp .env.example .env
+php artisan migrate:fresh --seed
+php artisan serve
