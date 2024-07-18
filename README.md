@@ -26,4 +26,10 @@ A step-by-step series of examples that tell you how to get a development env run
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Razkky/vehicle-tracking-api.git
+2.   git clone https://github.com/Razkky/vehicle-tracking-api.git
+3.   cd vehicle-tracking-api
+4.   composer install
+5.   cp .env.example .env 
+6.   php artisan migrate:fresh --seed
+7.   php artisan serve
+   
