@@ -44,8 +44,12 @@ To utilize Laravel's task scheduling capabilities, you must add a cron job that 
    ```bash
    crontab -e
    ```
-Add the following line to file 
-- * * * * * cd /path/to/your/project && php artisan schedule:run >> /path/to/your/project/storage/logs/cron.log 2>&1
+In the crontab editor, add the following line to schedule the task:
+
+``` bash
+* * * * * cd /path/to/your/project && php artisan schedule:run >> /path/to/your/project/storage/logs/cron.log 2>&1
+```
+
 Replace /path/to/your/project with the actual path to your Laravel project on your server. This command will execute the Laravel scheduler every minute and log the output to cron.log in your project's storage/logs directory.
 
 
