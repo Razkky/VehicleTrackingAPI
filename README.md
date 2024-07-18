@@ -27,12 +27,7 @@ A step-by-step series of examples that tell you how to get a development environ
 ```bash
 git clone https://github.com/Razkky/vehicle-tracking-api.git
 cd vehicle-tracking-api
-composer install
-php artisan key:generate
-cp .env.example .env
-php artisan migrate:fresh --seed
-php artisan serve
-
+./install.sh
 ```
 
 
